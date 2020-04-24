@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MiniMessenger;component/Styles/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <SolidColorBrush x:Key="BrushBlack" Color="{StaticResource ColorBlack}" />
+    <SolidColorBrush x:Key="BrushGrayDark" Color="{StaticResource ColorGrayDark}" />
+    <SolidColorBrush x:Key="BrushGrayDarkLight" Color="{StaticResource ColorGrayDarkLight}" />
+    <SolidColorBrush x:Key="BrushGray" Color="{StaticResource ColorGray}" />
+    <SolidColorBrush x:Key="BrushGrayLight" Color="{StaticResource ColorGrayLight}" />
+    <SolidColorBrush x:Key="BrushGrayLighter" Color="{StaticResource ColorGrayLighter}" />
+    <SolidColorBrush x:Key="BrushGraySmoke" Color="{StaticResource ColorGraySmoke}" />
+
+    <SolidColorBrush x:Key="BrushGreenDarkes" Color="{StaticResource ColorGreenDarkes}" />
+    <SolidColorBrush x:Key="BrushGreenDark" Color="{StaticResource ColorGreenDark}" />
+    <SolidColorBrush x:Key="BrushGreenDarkLight" Color="{StaticResource ColorGreenDarkLight}" />
+    <SolidColorBrush x:Key="BrushGreen" Color="{StaticResource ColorGreen}" />
+    <SolidColorBrush x:Key="BrushGreenLight" Color="{StaticResource ColorGreenLight}" />
+    <SolidColorBrush x:Key="BrushGreenLighter" Color="{StaticResource ColorGreenLighter}" />
+    <SolidColorBrush x:Key="BrushGreenSmoke" Color="{StaticResource ColorGreenSmoke}" />
+
+    <SolidColorBrush x:Key="BrushBlueDarkes" Color="{StaticResource ColorBlueDarkes}" />
+    <SolidColorBrush x:Key="BrushBlueDark" Color="{StaticResource ColorBlueDark}" />
+    <SolidColorBrush x:Key="BrushBlueDarkLight" Color="{StaticResource ColorBlueDarkLight}" />
+    <SolidColorBrush x:Key="BrushBlue" Color="{StaticResource ColorBlue}" />
+    <SolidColorBrush x:Key="BrushBlueLight" Color="{StaticResource ColorBlueLight}" />
+    <SolidColorBrush x:Key="BrushBlueLighter" Color="{StaticResource ColorBlueLighter}" />
+    <SolidColorBrush x:Key="BrushBlueSmoke" Color="{StaticResource ColorBlueSmoke}" />
+
+    <SolidColorBrush x:Key="BrushLilaDarkes" Color="{StaticResource ColorLilaDarkes}" />
+    <SolidColorBrush x:Key="BrushLilaDark" Color="{StaticResource ColorLilaDark}" />
+    <SolidColorBrush x:Key="BrushLilaDarkLight" Color="{StaticResource ColorLilaDarkLight}" />
+    <SolidColorBrush x:Key="BrushLila" Color="{StaticResource ColorLila}" />
+    <SolidColorBrush x:Key="BrushLilaLight" Color="{StaticResource ColorLilaLight}" />
+    <SolidColorBrush x:Key="BrushLilaLighter" Color="{StaticResource ColorLilaLighter}" />
+    <SolidColorBrush x:Key="BrushLilaSmoke" Color="{StaticResource ColorLilaSmoke}" />
+
+    <SolidColorBrush x:Key="BrushRedDarkes" Color="{StaticResource ColorRedDarkes}" />
+    <SolidColorBrush x:Key="BrushRedDark" Color="{StaticResource ColorRedDark}" />
+    <SolidColorBrush x:Key="BrushRedDarkLight" Color="{StaticResource ColorRedDarkLight}" />
+    <SolidColorBrush x:Key="BrushRed" Color="{StaticResource ColorRed}" />
+    <SolidColorBrush x:Key="BrushRedLight" Color="{StaticResource ColorRedLight}" />
+    <SolidColorBrush x:Key="BrushRedLighter" Color="{StaticResource ColorRedLighter}" />
+    <SolidColorBrush x:Key="BrushRedSmoke" Color="{StaticResource ColorRedSmoke}" />
+
+    <SolidColorBrush x:Key="BrushOrangeDarkes" Color="{StaticResource ColorOrangeDarkes}" />
+    <SolidColorBrush x:Key="BrushOrangeDark" Color="{StaticResource ColorOrangeDark}" />
+    <SolidColorBrush x:Key="BrushOrangeDarkLight" Color="{StaticResource ColorOrangeDarkLight}" />
+    <SolidColorBrush x:Key="BrushOrange" Color="{StaticResource ColorOrange}" />
+    <SolidColorBrush x:Key="BrushOrangeLight" Color="{StaticResource ColorOrangeLight}" />
+    <SolidColorBrush x:Key="BrushOrangeLighter" Color="{StaticResource ColorOrangeLighter}" />
+    <SolidColorBrush x:Key="BrushOrangeSmoke" Color="{StaticResource ColorOrangeSmoke}" />
+</ResourceDictionary>

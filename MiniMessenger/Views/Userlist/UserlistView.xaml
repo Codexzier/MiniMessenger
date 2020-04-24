@@ -1,0 +1,29 @@
+﻿<UserControl xmlns:Smily="clr-namespace:MiniMessenger.Components.Ui.Smily"  x:Class="MiniMessenger.Views.Userlist.UserlistView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MiniMessenger.Views.Userlist"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:UserlistViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <local:BooleanToOnlineStateBrushConverter x:Key="BooleanToOnlineStateBrushConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <ListBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ListBox_MouseDoubleClick">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="UserItem">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Ellipse Width="5" Height="5" Fill="{Binding IsOnline, Mode=OneWay, Converter={StaticResource BooleanToOnlineStateBrushConverter}}" />
+                        <Smily:SmilyEmoteControl Smily="Angry" />
+                        <Smily:SmilyEmoteControl Width="15" Height="15" />
+                        <TextBlock Text="{Binding Username}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
