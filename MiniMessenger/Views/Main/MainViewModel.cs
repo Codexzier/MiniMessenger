@@ -7,6 +7,8 @@ namespace MiniMessenger.Views.Main
     {
         private string _username;
         private string _hostAddress;
+        private IEnumerable<string> _hostAddressItems;
+        private int _interval;
 
         public string Username
         {
@@ -28,6 +30,24 @@ namespace MiniMessenger.Views.Main
             }
         }
 
-        public IEnumerable<string> HostAddressItems { get; set; }
+        public IEnumerable<string> HostAddressItems
+        {
+            get => this._hostAddressItems;
+            set
+            {
+                this._hostAddressItems = value;
+                this.OnNotifyPropertyChanged(nameof(this.HostAddressItems));
+            }
+        }
+
+        public int Interval
+        {
+            get => this._interval;
+            set
+            {
+                this._interval = value;
+                this.OnNotifyPropertyChanged(nameof(this.Interval));
+            }
+        }
     }
 }

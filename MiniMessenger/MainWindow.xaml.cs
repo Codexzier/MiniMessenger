@@ -1,5 +1,7 @@
 ﻿using MiniMessenger.Components.Data;
+using MiniMessenger.Components.Messenger;
 using MiniMessenger.Components.Ui.Eventbus;
+using MiniMessenger.Views.Base;
 using MiniMessenger.Views.Main;
 using MiniMessenger.Views.Menu;
 using MiniMessenger.Views.Userlist;
@@ -21,8 +23,9 @@ namespace MiniMessenger
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            EventbusManager.GetEventbus().OpenView<MainView>();
-            EventbusManager.GetEventbus().Register<MainWindow, UpdateCommandMessage>(this.UpdateCommandMessageReceived);
+            EventbusManager.OpenView<MainView>(0);
+            EventbusManager.Send<MenuView, UpdateCommandMessage>(new UpdateCommandMessage(ViewOpen.Main), 0);
+            EventbusManager.Register<MainWindow, UpdateCommandMessage>(this.UpdateCommandMessageReceived);
         }
 
         private bool UpdateCommandMessageReceived(IMessageContainer arg)

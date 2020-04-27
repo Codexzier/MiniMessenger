@@ -15,6 +15,8 @@
         </Grid.RowDefinitions>
         
         <menu:MenuView Grid.Row="0" />
-        <Eventbus:SideHostControl Grid.Row="1" HorizontalAlignment="Stretch" />
+
+        <Eventbus:SideHostControl Grid.Row="1" HorizontalAlignment="Stretch" Channel="0" />
+        <Eventbus:SideHostControl Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" Channel="1" />
     </Grid>
 </Window>

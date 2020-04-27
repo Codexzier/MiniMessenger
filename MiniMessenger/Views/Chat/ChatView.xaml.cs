@@ -1,4 +1,5 @@
 ﻿using MiniMessenger.Components.Data;
+using MiniMessenger.Components.Messenger;
 using MiniMessenger.Components.Service;
 using MiniMessenger.Components.Ui.Eventbus;
 using MiniMessenger.Views.Userlist;
@@ -11,30 +12,33 @@ namespace MiniMessenger.Views.Chat
 {
     public partial class ChatView : UserControl, IDisposable
     {
-        private DispatcherTimer _dispatcherTimer = new DispatcherTimer();
         private readonly ChatViewModel _viewModel;
         public ChatView()
         {
             this.InitializeComponent();
 
             this._viewModel = (ChatViewModel)this.DataContext;
-            EventbusManager.GetEventbus().Register<ChatView, LoadCommandMessage>(this.LoadCommandReceived);
 
-            this._dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            this._dispatcherTimer.Tick += this._dispatcherTimer_Tick;
-            this._dispatcherTimer.Start();
+            MessengerManager.GetInstance().Add(() =>
+            {
+                if (!EventbusManager.IsViewOpen(typeof(ChatView), 0))
+                {
+                    return;
+                }
+
+                this._dispatcherTimer_Tick();
+            });
+            EventbusManager.Register<ChatView, LoadCommandMessage>(this.LoadCommandReceived);
         }
 
         private bool LoadCommandReceived(IMessageContainer arg) 
         {
             this._viewModel.UserItem = arg.Content as UserItem;
 
-            this._dispatcherTimer.Start();
-
             return false;
         }
 
-        private void _dispatcherTimer_Tick(object sender, EventArgs e)
+        private void _dispatcherTimer_Tick()
         {
             var messages = ServiceConnector.GetInstance().GetMessages(this._viewModel.UserItem.ID);
 
@@ -77,6 +81,6 @@ namespace MiniMessenger.Views.Chat
             this._viewModel.SendText = string.Empty;
         }
 
-        public void Dispose() => EventbusManager.GetEventbus().Deregister<ChatView>();
+        public void Dispose() => EventbusManager.Deregister<ChatView>();
     }
 }

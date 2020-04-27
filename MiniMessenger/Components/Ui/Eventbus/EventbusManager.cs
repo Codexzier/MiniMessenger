@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Linq;
+using System.Diagnostics;
 
 namespace MiniMessenger.Components.Ui.Eventbus
 {
@@ -129,6 +130,8 @@ namespace MiniMessenger.Components.Ui.Eventbus
 
             internal bool IsViewOpen(Type type, int channel)
             {
+                Debug.WriteLine($"Type: {type.Name}, Channel: {channel}");
+
                 return SideHostControl.IsViewOpen(type, channel);
             }
 

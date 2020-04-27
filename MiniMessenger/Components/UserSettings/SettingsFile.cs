@@ -9,5 +9,7 @@ namespace MiniMessenger.Components.UserSettings
         public IEnumerable<string> ServerAddressItems { get; set; }
 
         public string Username { get; set; }
+
+        public int Interval { get; set; }
     }
 }

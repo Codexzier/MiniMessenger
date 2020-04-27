@@ -18,18 +18,21 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="5" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <TextBlock Text="Username" Grid.Column="0" Grid.Row="0" />
             <TextBox Text="{Binding Username}" Grid.Column="1" Grid.Row="0" />
 
             <TextBlock Text="Host Address" Grid.Column="0" Grid.Row="1" />
-            <ComboBox ItemsSource="{Binding HostAddressItems}" Text="{Binding HostAddress}" Grid.Column="1" Grid.Row="1" />
+            <ComboBox ItemsSource="{Binding HostAddressItems}" IsEditable="True" Text="{Binding HostAddress}" Grid.Column="1" Grid.Row="1" />
 
-            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+            <TextBlock Text="Interval" Grid.Column="0" Grid.Row="2" />
+            <TextBox Text="{Binding Interval}" Grid.Column="1" Grid.Row="2" />
+
+            <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
                 <Button Content="Accept" Click="ButtonAccept_Click" />
             </Grid>
         </Grid>

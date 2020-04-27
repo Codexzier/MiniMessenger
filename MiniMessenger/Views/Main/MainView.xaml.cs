@@ -1,4 +1,5 @@
 ﻿using MiniMessenger.Components.Data;
+using MiniMessenger.Components.Messenger;
 using MiniMessenger.Components.Service;
 using MiniMessenger.Components.Ui.Eventbus;
 using MiniMessenger.Components.UserSettings;
@@ -22,9 +23,11 @@ namespace MiniMessenger.Views.Main
             this._viewModel = (MainViewModel)this.DataContext;
 
             EventbusManager.Register<MainView, MainMessage>(this.EventBusReceivedMessage);
-            this._viewModel.Username = UserSettingsLoader.GetInstance().GetUsername();
-            this._viewModel.HostAddress = ServiceConnector.GetInstance().ServerAddress;
-           // this._viewModel.HostAddressItems = ServiceConnector.GetInstance()
+            var settings = UserSettingsLoader.GetInstance().Settings;
+            this._viewModel.Username = settings.Username;
+            this._viewModel.Interval = settings.Interval;
+            this._viewModel.HostAddressItems = settings.ServerAddressItems;
+            this._viewModel.HostAddress = settings.ServerAddress;
         }
 
         private bool EventBusReceivedMessage(IMessageContainer arg)
@@ -68,8 +71,14 @@ namespace MiniMessenger.Views.Main
                     this._viewModel.HostAddressItems.Append(this._viewModel.HostAddress);
                 }
 
-                UserSettingsLoader.GetInstance().Save(new SettingsFile { Username = this._viewModel.Username, ServerAddress = this._viewModel.HostAddress });
+                var settings = new SettingsFile {
+                    Username = this._viewModel.Username, 
+                    ServerAddress = this._viewModel.HostAddress, 
+                    Interval = this._viewModel.Interval 
+                };
+                UserSettingsLoader.GetInstance().Save(settings);
 
+                MessengerManager.GetInstance().Start(this._viewModel.Interval);
                 return;
             }
 

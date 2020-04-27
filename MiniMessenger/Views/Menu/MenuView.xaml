@@ -3,24 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MiniMessenger.Views.Menu"
+             xmlns:local="clr-namespace:MiniMessenger.Views.Menu" 
+             xmlns:eventbus="clr-namespace:MiniMessenger.Components.Ui.Eventbus"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="800">
     <UserControl.Resources>
-        <local:ViewOpenToVisableConverter x:Key="ViewOpenToVisableConverter" />
+        <eventbus:ViewOpenToVisableConverter x:Key="ViewOpenToVisableConverter" />
     </UserControl.Resources>
     <UserControl.DataContext>
         <local:MenuViewModel />
     </UserControl.DataContext>
     <StackPanel Margin="5" Orientation="Horizontal">
         
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Refresh interval" />
-            <TextBox Text="{Binding Interval}" MinWidth="50" />
-        </StackPanel>
-
         <Button Content="Setup" Width="100" Click="ButtonOpenMain_Click" Visibility="{Binding ViewOpened, Converter={StaticResource ViewOpenToVisableConverter}, ConverterParameter='Userlist'}" />
-        <Button Content="Zurück" Click="ButtonOpenUserList_Click" Visibility="{Binding ViewOpened, Converter={StaticResource ViewOpenToVisableConverter}, ConverterParameter='Main'}" />
+        <Button Content="Zurück" Click="ButtonOpenUserList_Click" Visibility="{Binding ViewOpened, Converter={StaticResource ViewOpenToVisableConverter}, ConverterParameter='Chat'}" />
         
     </StackPanel>
 </UserControl>

@@ -1,39 +1,51 @@
 ﻿using MiniMessenger.Components.Data;
 using MiniMessenger.Components.UserSettings;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Windows;
 
 namespace MiniMessenger.Components.Service
 {
-    public class ServiceConnector
+    public class ServiceConnector : IServiceConnector
     {
-        private static ServiceConnector _service;
+        private static ServiceConnector _instance;
         private UserItem _user;
 
-        public string ServerAddress { get; private set; }
+        /// <summary>
+        /// This id can use for user and device
+        /// </summary>
+        private const string _urlParameterId = "id";
 
-        private ServiceConnector(string serverAddress)
+        public string ServerAddress { get; private set; }
+        public IEnumerable<string> ServerAddressItems { get; private set; }
+
+        private ServiceConnector(string serverAddress, IEnumerable<string> serverAddressItems)
         {
             this.ServerAddress = serverAddress;
+            this.ServerAddressItems = serverAddressItems;
         }
 
-        internal static ServiceConnector GetInstance()
+        public static ServiceConnector GetInstance()
         {
-            if (_service == null)
+            if (_instance == null)
             {
-                var serverAddress = UserSettingsLoader.GetInstance().GetUrl();
-                _service = new ServiceConnector(serverAddress);
+                var settings = UserSettingsLoader.GetInstance().Settings;
+                var serverAddress = settings.ServerAddress;
+                var serverAddressItems = settings.ServerAddressItems;
+                _instance = new ServiceConnector(serverAddress, serverAddressItems);
             }
 
-            return _service;
+            return _instance;
         }
 
 
-        public UserItem[] GetUserItems()
+        public UserItem[] GetAllUsers()
         {
-            var downloadString = this.TryDownloadString($"{this.ServerAddress}?userid={this._user.ID}");
+            var userId = this._user != null ? this._user.ID : -1;
+
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}getAllUsers?{_urlParameterId}={userId}");
 
             if (string.IsNullOrEmpty(downloadString))
             {
@@ -45,9 +57,9 @@ namespace MiniMessenger.Components.Service
                 : new UserItem[0];
         }
 
-        internal MessageItem[] GetMessages(long toUserId)
+        public MessageItem[] GetMessages(long toUserId)
         {
-            var downloadString = this.TryDownloadString($"{this.ServerAddress}getMessages?userid={this._user.ID}&touserid={toUserId}");
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}getMessages?{_urlParameterId}={this._user.ID}&touserid={toUserId}");
 
             if (string.IsNullOrEmpty(downloadString))
             {
@@ -66,9 +78,9 @@ namespace MiniMessenger.Components.Service
         }
 
 
-        internal bool SendMessage(long toUserId, string sendText)
+        public bool SendMessage(long toUserId, string sendText)
         {
-            var downloadString = this.TryDownloadString($"{this.ServerAddress}sendMessage?userid={this._user.ID}&touserid={toUserId}&messagetext={sendText}&fromme={true}");
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}sendMessage?{_urlParameterId}={this._user.ID}&touserid={toUserId}&messagetext={sendText}&fromme={true}");
 
             if (string.IsNullOrEmpty(downloadString))
             {
@@ -80,7 +92,7 @@ namespace MiniMessenger.Components.Service
             return result.Success;
         }
 
-        internal bool TrySetUsername(string username, out UserItem userItem)
+        public bool TrySetUsername(string username, out UserItem userItem)
         {
             userItem = null;
             username = username.Replace(' ', '_');
@@ -102,7 +114,7 @@ namespace MiniMessenger.Components.Service
             return userItem != null;
         }
 
-        internal void SetAddress(string serverAddres) => this.ServerAddress = serverAddres;
+        public void SetAddress(string serverAddres) => this.ServerAddress = serverAddres;
 
         private string TryDownloadString(string urlString)
         {
@@ -127,5 +139,46 @@ namespace MiniMessenger.Components.Service
 
             return result;
         }
+
+        public IEnumerable<DeviceItem> DeviceGetAll()
+        {
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}deviceGetAll");
+            if (string.IsNullOrEmpty(downloadString))
+            {
+                return new DeviceItem[0];
+            }
+
+            var result = JsonConvert.DeserializeObject<ResponseDevices>(downloadString);
+
+            if (result.Content is DeviceItem[] deviceItems && result.Success)
+            {
+                return deviceItems;
+            }
+
+            return new DeviceItem[0];
+
+        }
+
+        public long DeviceGetValue(long id)
+        {
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}deviceGetValue?{_urlParameterId}={id}");
+            if (string.IsNullOrEmpty(downloadString))
+            {
+                return -1;
+            }
+
+            var result = JsonConvert.DeserializeObject<ResponseDevice>(downloadString);
+            if (!result.Success)
+            {
+                return -1;
+            }
+
+            return result.Value;
+        }
+
+
+        public bool DeviceSendCommand(long id, long value) => throw new System.NotImplementedException();
+        
+        
     }
 }

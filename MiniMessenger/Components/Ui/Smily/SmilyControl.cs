@@ -20,8 +20,6 @@ namespace MiniMessenger.Components.Ui.Smily
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SmilyControl), new FrameworkPropertyMetadata(typeof(SmilyControl)));
         }
 
-        private readonly EventbusManager _eventbus;
-
         private void OnPropertyChanged(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -30,7 +28,6 @@ namespace MiniMessenger.Components.Ui.Smily
 
         public SmilyControl()
         {
-            this._eventbus = EventbusManager.GetEventbus();
         }
 
         public override void OnApplyTemplate()
@@ -74,6 +71,6 @@ namespace MiniMessenger.Components.Ui.Smily
             }
         }
 
-        public void Dispose() => this._eventbus.Deregister<SmilyControl>();
+        public void Dispose() => EventbusManager.Deregister<SmilyControl>();
     }
 }

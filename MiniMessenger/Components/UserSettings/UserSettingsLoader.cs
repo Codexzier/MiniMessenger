@@ -8,7 +8,7 @@ namespace MiniMessenger.Components.UserSettings
     public class UserSettingsLoader
     {
         private static UserSettingsLoader _userSettings;
-        private string _settingFile = $"{Environment.CurrentDirectory}\\settings.json";
+        private readonly string _settingFile = $"{Environment.CurrentDirectory}\\settings.json";
 
         private UserSettingsLoader()
         {
@@ -24,22 +24,18 @@ namespace MiniMessenger.Components.UserSettings
             return _userSettings;
         }
 
-        public string GetUrl()
-        {
-            var setting = this.LoadSettings();
-
-            return setting.ServerAddress;
-        }
+        internal SettingsFile Settings => this.LoadSettings();
 
         private SettingsFile LoadSettings()
         {
-            if(!File.Exists(this._settingFile))
+            if (!File.Exists(this._settingFile))
             {
                 var firstSetting = new SettingsFile
                 {
                     Username = "Benutzername",
                     ServerAddress = "http://localhost:5000/",
-                    ServerAddressItems = new List<string>() { "http://localhost:5000/" }
+                    ServerAddressItems = new List<string>() { "http://localhost:5000/" },
+                    Interval = 1
                 };
 
                 this.SaveToJsonFile(firstSetting);
@@ -49,23 +45,28 @@ namespace MiniMessenger.Components.UserSettings
 
             var setting = JsonConvert.DeserializeObject<SettingsFile>(fileContent);
 
-            if(setting.ServerAddressItems == null)
+            SetupDefault(setting);
+
+            return setting;
+        }
+
+        private static void SetupDefault(SettingsFile setting)
+        {
+            if (setting.ServerAddressItems == null)
             {
                 setting.ServerAddressItems = new List<string>() { setting.ServerAddress };
             }
 
-            return setting;
+            if (setting.Interval <= 0)
+            {
+                setting.Interval = 1;
+            }
         }
 
         private void SaveToJsonFile(SettingsFile firstSetting)
         {
             var toSave = JsonConvert.SerializeObject(firstSetting);
             File.WriteAllText(this._settingFile, toSave);
-        }
-
-        public string GetUsername()
-        {
-            return this.LoadSettings().Username;
         }
 
         internal void Save(SettingsFile settingsFile) => this.SaveToJsonFile(settingsFile);

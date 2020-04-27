@@ -1,4 +1,5 @@
-﻿using MiniMessenger.Components.Service;
+﻿using MiniMessenger.Components.Messenger;
+using MiniMessenger.Components.Service;
 using MiniMessenger.Components.Ui.Eventbus;
 using MiniMessenger.Views.Base;
 using MiniMessenger.Views.Chat;
@@ -17,7 +18,7 @@ namespace MiniMessenger.Views.Userlist
     {
         private readonly UserlistViewModel _viewModel;
         private ServiceConnector _serviceConnector;
-        private EventbusManager _eventbus;
+
 
         public UserlistView()
         {
@@ -26,15 +27,29 @@ namespace MiniMessenger.Views.Userlist
             this._serviceConnector = ServiceConnector.GetInstance();
             this._viewModel = (UserlistViewModel)this.DataContext;
 
-            this._eventbus = EventbusManager.GetEventbus();
-            this._eventbus.Register<UserlistView, UpdateCommandMessage>(this.ReceiveUpdateCommand);
+            this.SetupUpdate();
+        }
+
+        private void SetupUpdate()
+        {
+            MessengerManager.GetInstance().Add(() =>
+            {
+                if (!EventbusManager.IsViewOpen(typeof(UserlistView), 0))
+                {
+                    return;
+                }
+
+                
+                EventbusManager.Send<UserlistView, UpdateCommandMessage>(new UpdateCommandMessage(CommandMessage.Update), 0);
+            });
+            EventbusManager.Register<UserlistView, UpdateCommandMessage>(this.ReceiveUpdateCommand);
         }
 
         private bool ReceiveUpdateCommand(IMessageContainer arg)
         {
             if(arg.Content is CommandMessage received && received.Equals(CommandMessage.Update))
             {
-               var userItems = this._serviceConnector.GetUserItems();
+               var userItems = this._serviceConnector.GetAllUsers();
 
                 foreach (var item in userItems)
                 {
@@ -47,8 +62,6 @@ namespace MiniMessenger.Views.Userlist
                         //if (user.IsOnline != item.IsOnline)
                         //{
                         //    item.IsOnline = user.IsOnline;
-
-                            
                         //}
                     }
                     else
@@ -66,11 +79,10 @@ namespace MiniMessenger.Views.Userlist
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-
-            this._eventbus.Send<ChatView, LoadCommandMessage>(new LoadCommandMessage(this._viewModel.SelectedUser), true);
+            EventbusManager.Send<MenuView, UpdateCommandMessage>(new UpdateCommandMessage(ViewOpen.Chat), 0);
+            EventbusManager.Send<ChatView, LoadCommandMessage>(new LoadCommandMessage(this._viewModel.SelectedUser), 0, true);
         }
 
-        public void Dispose() => this._eventbus.Deregister<UserlistView>();
+        public void Dispose() => EventbusManager.Deregister<UserlistView>();
     }
 }

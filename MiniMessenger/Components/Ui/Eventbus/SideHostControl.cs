@@ -2,6 +2,7 @@
 using MiniMessenger.Components.Ui.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,25 @@ namespace MiniMessenger.Components.Ui.Eventbus
 
         public static bool IsViewOpen(Type view, int channel)
         {
-            return TypeViews.Any(a => a.Channel == channel && a.TypeView.Equals(view));
+            Debug.WriteLine($"Type: {view.Name}, Channel: {channel}, TypeViews: {TypeViews.Count()}");
+
+            return TypeViews.Any(a =>
+            {
+                if(a.Channel != channel)
+                {
+                    return false;
+                }
+
+                if(!a.TypeView.Equals(view))
+                {
+                    Debug.WriteLine($"Typeview is not open: {a.TypeView.Name}");
+                    return false;
+                }
+
+                Debug.WriteLine($"Typeview is open: {a.TypeView.Name}");
+
+                return true;
+            });
         }
 
 
@@ -49,7 +68,7 @@ namespace MiniMessenger.Components.Ui.Eventbus
                 disposable.Dispose();
             }
 
-            this.RemoveViewFromChannel(obj, channel);
+            this.RemoveViewFromChannel(channel);
 
             SideHostControl.TypeViews.Add(new SideHostTypeChannel(channel, obj.GetType()));
 
@@ -75,14 +94,14 @@ namespace MiniMessenger.Components.Ui.Eventbus
                 return;
             }
 
-            if (this.RemoveViewFromChannel(view, channel))
+            if (this.RemoveViewFromChannel(channel))
             {
                 disposable.Dispose();
                 this._presenter.Content = null;
             }
         }
 
-        private bool RemoveViewFromChannel(object obj, int channel)
+        private bool RemoveViewFromChannel(int channel)
         {
             var d = SideHostControl.TypeViews.FirstOrDefault(a => {
                 if (a.Channel != channel)
@@ -90,20 +109,7 @@ namespace MiniMessenger.Components.Ui.Eventbus
                     return false;
                 }
 
-                if (a.TypeView.Equals(obj.GetType()))
-                {
-                    return true;
-                }
-
-                if (obj is Type view)
-                {
-                    var presenterHasType = this._presenter.Content.GetType().Name;
-                    var viewTypeName = view.Name;
-
-                    return presenterHasType.Equals(viewTypeName);
-                }
-
-                return false;
+                return true;
             });
 
             if (d != null)

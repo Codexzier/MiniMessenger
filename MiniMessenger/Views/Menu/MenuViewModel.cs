@@ -1,11 +1,18 @@
-﻿using MiniMessenger.Views.Base;
+﻿using MiniMessenger.Components.Ui.Eventbus;
+using MiniMessenger.Views.Base;
 
 namespace MiniMessenger.Views.Menu
 {
     public class MenuViewModel : BaseViewModel
     {
-        public int Interval { get; set; } = 1;
+        private ViewOpen _viewOpened = ViewOpen.Main;
 
-        public ViewOpen ViewOpened { get; set; } = ViewOpen.Main;
+        public ViewOpen ViewOpened { get => _viewOpened;
+            set
+            {
+                _viewOpened = value;
+                this.OnNotifyPropertyChanged(nameof(this.ViewOpened));
+            }
+        }
     }
 }

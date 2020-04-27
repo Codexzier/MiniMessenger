@@ -27,6 +27,10 @@
             <Style TargetType="RichTextBox">
                 <Setter Property="Margin" Value="5 2" />
             </Style>
+
+            <Style TargetType="ComboBox">
+                <Setter Property="Margin" Value="5 2" />
+            </Style>
         </ResourceDictionary>
         
     </Application.Resources>

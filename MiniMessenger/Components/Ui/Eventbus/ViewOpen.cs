@@ -5,6 +5,8 @@
         Nothing,
         Main,
         DotPalette,
-        EditColor
+        EditColor,
+        Userlist,
+        Chat
     }
 }
