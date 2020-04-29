@@ -17,7 +17,7 @@ namespace MiniMessenger.Views.Userlist
     public partial class UserlistView : UserControl, IDisposable
     {
         private readonly UserlistViewModel _viewModel;
-        private ServiceConnector _serviceConnector;
+        private readonly ServiceConnector _serviceConnector;
 
 
         public UserlistView()
@@ -59,16 +59,11 @@ namespace MiniMessenger.Views.Userlist
                     {
                         this._viewModel.Users.Remove(item);
                         this._viewModel.Users.Add(item);
-                        //if (user.IsOnline != item.IsOnline)
-                        //{
-                        //    item.IsOnline = user.IsOnline;
-                        //}
                     }
                     else
                     {
                         this._viewModel.Users.Add(item);
                     }
-
                 }
 
                 return true;

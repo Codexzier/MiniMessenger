@@ -1,5 +1,6 @@
 ﻿using MiniMessenger.Components.Ui.Eventbus;
 using MiniMessenger.Views.Base;
+using MiniMessenger.Views.Devices;
 using MiniMessenger.Views.Main;
 using MiniMessenger.Views.Userlist;
 using System;
@@ -54,6 +55,22 @@ namespace MiniMessenger.Views.Menu
 
             this._viewModel.ViewOpened = ViewOpen.Userlist;
             EventbusManager.OpenView<UserlistView>(0);
+        }
+
+        private void ButtonShowMessenger_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonShowDevices_Click(object sender, RoutedEventArgs e)
+        {
+            if(EventbusManager.IsViewOpen(typeof(DevicesView), 2))
+            {
+                EventbusManager.CloseView<DevicesView>(2);
+                return;
+            }
+
+            EventbusManager.OpenView<DevicesView>(2);
         }
     }
 }

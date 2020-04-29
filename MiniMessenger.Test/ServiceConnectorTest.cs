@@ -22,7 +22,7 @@ namespace MiniMessenger.Test
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Length);
+            Assert.IsTrue(result.Any());
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace MiniMessenger.Test
 
 
         [TestMethod]
-        public void IServiceConnectorDeviceGetAllTest()
+        public void ServiceConnectorDeviceGetAllTest()
         {
             // arrange
             IServiceConnector serviceConnector = ServiceConnector.GetInstance();
@@ -126,36 +126,79 @@ namespace MiniMessenger.Test
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count());
+            Assert.IsTrue(result.Any());
         }
 
         [TestMethod]
-        public void IServiceConnectorDeviceGetValueTest()
+        public void ServiceConnectorDeviceGetValueTest()
         {
             // arrange
             IServiceConnector serviceConnector = ServiceConnector.GetInstance();
             serviceConnector.SetAddress("http://localhost:5000/");
-
+            // it must a non exist device
+            const long id = 12345678L;
             // act
-            var result = serviceConnector.DeviceGetValue(1L);
+            var result = serviceConnector.DeviceGetValue(id);
 
             // assert
             Assert.AreEqual(0, result);
         }
 
         [TestMethod]
-        public void IServiceConnectorDeviceSendComandTest()
+        public void ServiceConnectorDeviceSendComandValueTest()
         {
             // arrange
             IServiceConnector serviceConnector = ServiceConnector.GetInstance();
             serviceConnector.SetAddress("http://localhost:5000/");
             serviceConnector.DeviceGetValue(1L);
+            const long value = 234L;
 
             // act
             var result = serviceConnector.DeviceSendCommand(1L, 234);
+            var resultValue = serviceConnector.DeviceGetValue(1L);
 
             // assert
-            Assert.AreEqual(0, result);
+            Assert.IsTrue(result);
+            Assert.AreEqual(value, resultValue);
+        }
+
+        [TestMethod]
+        public void ServiceConnectorDeviceSendComandTextTest()
+        {
+            // arrange
+            IServiceConnector serviceConnector = ServiceConnector.GetInstance();
+            serviceConnector.SetAddress("http://localhost:5000/");
+            serviceConnector.DeviceGetText(1L);
+            string sendText = "Hello";
+
+            // act
+            var result = serviceConnector.DeviceSendCommand(1L, sendText);
+            var resultText = serviceConnector.DeviceGetText(1L);
+
+            // assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(sendText, resultText);
+        }
+
+        [TestMethod]
+        public void ServiceConnectorDeviceSendComandGetResponseTest()
+        {
+            // arrange
+            IServiceConnector serviceConnector = ServiceConnector.GetInstance();
+            serviceConnector.SetAddress("http://localhost:5000/");
+            serviceConnector.DeviceGet(1L);
+            const long id = 1L;
+            const long value = 456L;
+            string sendText = "Hello";
+
+            // act
+            var result = serviceConnector.DeviceSendCommand(id, value, sendText);
+            var resultResponse = serviceConnector.DeviceGet(id);
+
+            // assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(sendText, resultResponse.Text);
+            Assert.AreEqual(value, resultResponse.Value);
         }
     }
 }

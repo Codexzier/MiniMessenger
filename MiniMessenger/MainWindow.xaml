@@ -9,14 +9,20 @@
                 mc:Ignorable="d"
         Title="Mini Messenger" Height="400" Width="500" Loaded="Window_Loaded">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <menu:MenuView Grid.Row="0" />
+        <menu:MenuView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
 
         <Eventbus:SideHostControl Grid.Row="1" HorizontalAlignment="Stretch" Channel="0" />
         <Eventbus:SideHostControl Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" Channel="1" />
+
+        <Eventbus:SideHostControl Grid.Row="1" Grid.Column="1" Channel="2" />
     </Grid>
 </Window>

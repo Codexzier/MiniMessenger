@@ -33,7 +33,7 @@ namespace MiniMessenger.Views.Main
         private bool EventBusReceivedMessage(IMessageContainer arg)
         {
             // do things with the content
-       
+
 
             return true;
         }
@@ -45,13 +45,13 @@ namespace MiniMessenger.Views.Main
 
         private void ButtonAccept_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(this._viewModel.Username))
+            if (string.IsNullOrEmpty(this._viewModel.Username))
             {
                 MessageBox.Show("username must be set.");
                 return;
             }
 
-            if(string.IsNullOrEmpty(this._viewModel.HostAddress))
+            if (string.IsNullOrEmpty(this._viewModel.HostAddress))
             {
                 MessageBox.Show("host address must be set.");
                 return;
@@ -66,15 +66,17 @@ namespace MiniMessenger.Views.Main
                 EventbusManager.Send<MainWindow, UpdateCommandMessage>(new UpdateCommandMessage(userItem), 0);
                 EventbusManager.Send<MenuView, UpdateCommandMessage>(new UpdateCommandMessage(ViewOpen.Userlist), 0);
 
-                if(!this._viewModel.HostAddressItems.Any(a => a.Equals(this._viewModel.HostAddress)))
+                if (!this._viewModel.HostAddressItems.Any(a => a.Equals(this._viewModel.HostAddress)))
                 {
-                    this._viewModel.HostAddressItems.Append(this._viewModel.HostAddress);
+                    this._viewModel.HostAddressItems = this._viewModel.HostAddressItems.Append(this._viewModel.HostAddress);
                 }
 
-                var settings = new SettingsFile {
-                    Username = this._viewModel.Username, 
-                    ServerAddress = this._viewModel.HostAddress, 
-                    Interval = this._viewModel.Interval 
+                var settings = new SettingsFile
+                {
+                    Username = this._viewModel.Username,
+                    Interval = this._viewModel.Interval,
+                    ServerAddress = this._viewModel.HostAddress,
+                    ServerAddressItems = this._viewModel.HostAddressItems
                 };
                 UserSettingsLoader.GetInstance().Save(settings);
 

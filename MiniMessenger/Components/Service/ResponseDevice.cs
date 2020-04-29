@@ -4,5 +4,6 @@
     {
         public string Content { get; set; }
         public long Value { get; set; }
+        public string Text { get; set; }
     }
 }

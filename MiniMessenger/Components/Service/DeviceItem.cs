@@ -5,5 +5,7 @@
         public long ID { get; set; }
 
         public long Value { get; set; }
+
+        public string Text { get; set; }
     }
 }

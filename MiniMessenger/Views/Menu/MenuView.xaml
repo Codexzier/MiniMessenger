@@ -17,6 +17,8 @@
         
         <Button Content="Setup" Width="100" Click="ButtonOpenMain_Click" Visibility="{Binding ViewOpened, Converter={StaticResource ViewOpenToVisableConverter}, ConverterParameter='Userlist'}" />
         <Button Content="Zurück" Click="ButtonOpenUserList_Click" Visibility="{Binding ViewOpened, Converter={StaticResource ViewOpenToVisableConverter}, ConverterParameter='Chat'}" />
-        
+
+        <Button Content="Messenger" Click="ButtonShowMessenger_Click" />
+        <Button Content="Devices" Click="ButtonShowDevices_Click" />
     </StackPanel>
 </UserControl>

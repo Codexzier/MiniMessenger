@@ -68,7 +68,7 @@ namespace MiniMessenger.Components.Service
 
             var response = JsonConvert.DeserializeObject<ResponseMessages>(downloadString);
 
-            if(!response.Success)
+            if (!response.Success)
             {
                 Debug.WriteLine("Error: can not get aktual messages.");
                 return new MessageItem[0];
@@ -99,7 +99,7 @@ namespace MiniMessenger.Components.Service
 
             var downloadString = this.TryDownloadString($"{this.ServerAddress}addUser?username={username}");
 
-            if(string.IsNullOrEmpty(downloadString) || downloadString.Equals("[]"))
+            if (string.IsNullOrEmpty(downloadString) || downloadString.Equals("[]"))
             {
                 return false;
             }
@@ -177,8 +177,75 @@ namespace MiniMessenger.Components.Service
         }
 
 
-        public bool DeviceSendCommand(long id, long value) => throw new System.NotImplementedException();
-        
-        
+        public string DeviceGetText(long id)
+        {
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}deviceGetText?{_urlParameterId}={id}");
+            if (string.IsNullOrEmpty(downloadString))
+            {
+                return "ERROR";
+            }
+
+            var result = JsonConvert.DeserializeObject<ResponseDevice>(downloadString);
+            if (!result.Success)
+            {
+                return "-";
+            }
+
+            return result.Text;
+        }
+
+
+        public ResponseDevice DeviceGet(long id)
+        {
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}deviceGet?{_urlParameterId}={id}");
+            if (string.IsNullOrEmpty(downloadString))
+            {
+                return null;
+            }
+
+            var result = JsonConvert.DeserializeObject<ResponseDevice>(downloadString);
+
+            return result;
+        }
+
+
+        public bool DeviceSendCommand(long id, long value)
+        {
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}deviceSendCommand?{_urlParameterId}={id}&value={value}");
+            if (string.IsNullOrEmpty(downloadString))
+            {
+                return false;
+            }
+
+            var result = JsonConvert.DeserializeObject<ResponseDevice>(downloadString);
+
+            return result.Success;
+        }
+
+        public bool DeviceSendCommand(long id, string text)
+        {
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}deviceSendCommand?{_urlParameterId}={id}&text={text}");
+            if (string.IsNullOrEmpty(downloadString))
+            {
+                return false;
+            }
+
+            var result = JsonConvert.DeserializeObject<ResponseDevice>(downloadString);
+
+            return result.Success;
+        }
+
+        public bool DeviceSendCommand(long id, long value, string sendText)
+        {
+            var downloadString = this.TryDownloadString($"{this.ServerAddress}deviceSendCommand?{_urlParameterId}={id}&value={value}&text={sendText}");
+            if (string.IsNullOrEmpty(downloadString))
+            {
+                return false;
+            }
+
+            var result = JsonConvert.DeserializeObject<ResponseDevice>(downloadString);
+
+            return result.Success;
+        }
     }
 }
