@@ -14,57 +14,58 @@
     <StackPanel>
         <!-- Black Gray steps -->
         <Rectangle Fill="{StaticResource BrushBlack}" Height="20" />
-        <Rectangle Fill="#FF2C2C2C" Height="20" />
-        <Rectangle Fill="#FF424242" Height="20" />
-        <Rectangle Fill="#FF6C6C6C" Height="20" />
-        <Rectangle Fill="#FF8D8D8D" Height="20" />
-        <Rectangle Fill="#FFB8B8B8" Height="20" />
-        <Rectangle Fill="#FFDADADA" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGrayDark}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGrayDarkLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGray}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGrayLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGrayLighter}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGraySmoke}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGrayHalf}" Height="20" />
 
         <!-- green -->
-        <Rectangle Fill="#FF0F3800" Height="20" />
-        <Rectangle Fill="#FF195B01" Height="20" />
-        <Rectangle Fill="#FF228000" Height="20" />
-        <Rectangle Fill="#FF2CA400" Height="20" />
-        <Rectangle Fill="#FF35C700" Height="20" />
-        <Rectangle Fill="#FF3DE400" Height="20" />
-        <Rectangle Fill="#FF44FF00" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGreenDarkes}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGreenDark}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGreenDarkLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGreen}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGreenLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGreenLighter}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushGreenSmoke}" Height="20" />
 
         <!-- blue -->
-        <Rectangle Fill="#FF002E38" Height="20" />
-        <Rectangle Fill="#FF01425B" Height="20" />
-        <Rectangle Fill="#FF006980" Height="20" />
-        <Rectangle Fill="#FF007FA4" Height="20" />
-        <Rectangle Fill="#FF0091C7" Height="20" />
-        <Rectangle Fill="#FF00BBE4" Height="20" />
-        <Rectangle Fill="#FF00C5FF" Height="20" />
+        <Rectangle Fill="{StaticResource BrushBlueDarkes}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushBlueDark}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushBlueDarkLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushBlue}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushBlueLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushBlueLighter}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushBlueSmoke}" Height="20" />
 
         <!-- lila -->
-        <Rectangle Fill="#FF190038" Height="20" />
-        <Rectangle Fill="#FF2A015B" Height="20" />
-        <Rectangle Fill="#FF3A0080" Height="20" />
-        <Rectangle Fill="#FF3C00A4" Height="20" />
-        <Rectangle Fill="#FF5100C7" Height="20" />
-        <Rectangle Fill="#FF5D00E4" Height="20" />
-        <Rectangle Fill="#FF7400FF" Height="20" />
+        <Rectangle Fill="{StaticResource BrushLilaDarkes}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushLilaDark}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushLilaDarkLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushLila}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushLilaLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushLilaLighter}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushLilaSmoke}" Height="20" />
 
         <!-- red -->
-        <Rectangle Fill="#FF380000" Height="20" />
-        <Rectangle Fill="#FF5B0101" Height="20" />
-        <Rectangle Fill="Maroon" Height="20" />
-        <Rectangle Fill="#FFA40000" Height="20" />
-        <Rectangle Fill="#FFC70000" Height="20" />
-        <Rectangle Fill="#FFE40000" Height="20" />
-        <Rectangle Fill="Red" Height="20" />
-        
+        <Rectangle Fill="{StaticResource BrushRedDarkes}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushRedDark}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushRedDarkLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushRed}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushRedLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushRedLighter}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushRedSmoke}" Height="20" />
+
         <!-- orange -->
-        <Rectangle Fill="#FF382B00" Height="20" />
-        <Rectangle Fill="#FF5B4201" Height="20" />
-        <Rectangle Fill="#FF805D00" Height="20" />
-        <Rectangle Fill="#FFA47F00" Height="20" />
-        <Rectangle Fill="#FFC79A00" Height="20" />
-        <Rectangle Fill="#FFE49B00" Height="20" />
-        <Rectangle Fill="#FFFFAE00" Height="20" />
+        <Rectangle Fill="{StaticResource BrushOrangeDarkes}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushOrangeDark}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushOrangeDarkLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushOrange}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushOrangeLight}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushOrangeLighter}" Height="20" />
+        <Rectangle Fill="{StaticResource BrushOrangeLighter}" Height="20" />
 
     </StackPanel>
 </UserControl>

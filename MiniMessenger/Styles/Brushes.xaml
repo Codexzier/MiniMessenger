@@ -11,6 +11,7 @@
     <SolidColorBrush x:Key="BrushGrayLight" Color="{StaticResource ColorGrayLight}" />
     <SolidColorBrush x:Key="BrushGrayLighter" Color="{StaticResource ColorGrayLighter}" />
     <SolidColorBrush x:Key="BrushGraySmoke" Color="{StaticResource ColorGraySmoke}" />
+    <SolidColorBrush x:Key="BrushGrayHalf" Color="{StaticResource ColorGrayHalf}" />
 
     <SolidColorBrush x:Key="BrushGreenDarkes" Color="{StaticResource ColorGreenDarkes}" />
     <SolidColorBrush x:Key="BrushGreenDark" Color="{StaticResource ColorGreenDark}" />

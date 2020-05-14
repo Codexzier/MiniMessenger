@@ -8,15 +8,18 @@
     <Color x:Key="ColorGrayLight">#FF8D8D8D</Color>
     <Color x:Key="ColorGrayLighter">#FFB8B8B8</Color>
     <Color x:Key="ColorGraySmoke">#FFB8B8B8</Color>
+    <Color x:Key="ColorGrayHalf">#7FB8B8B8</Color>
 
-    <Color x:Key="ColorGreenDarkes">#FF1C1C1C</Color>
-    <Color x:Key="ColorGreenDark">#FF2C2C2C</Color>
-    <Color x:Key="ColorGreenDarkLight">#FF2C2C2C</Color>
-    <Color x:Key="ColorGreen">#FF6C6C6C</Color>
-    <Color x:Key="ColorGreenLight">#FF8D8D8D</Color>
-    <Color x:Key="ColorGreenLighter">#FFB8B8B8</Color>
-    <Color x:Key="ColorGreenSmoke">#FFB8B8B8</Color>
+    <!-- green -->
+    <Color x:Key="ColorGreenDarkes">#FF0F3800</Color>
+    <Color x:Key="ColorGreenDark">#FF195B01</Color>
+    <Color x:Key="ColorGreenDarkLight">#FF228000</Color>
+    <Color x:Key="ColorGreen">#FF2CA400</Color>
+    <Color x:Key="ColorGreenLight">#FF35C700</Color>
+    <Color x:Key="ColorGreenLighter">#FF3DE400</Color>
+    <Color x:Key="ColorGreenSmoke">#FF44FF00</Color>
 
+    <!-- blue -->
     <Color x:Key="ColorBlueDarkes">#FF002E38</Color>
     <Color x:Key="ColorBlueDark">#FF01425B</Color>
     <Color x:Key="ColorBlueDarkLight">#FF006980</Color>
@@ -25,6 +28,7 @@
     <Color x:Key="ColorBlueLighter">#FF00BBE4</Color>
     <Color x:Key="ColorBlueSmoke">#FF00C5FF</Color>
 
+    <!-- lila -->
     <Color x:Key="ColorLilaDarkes">#FF190038</Color>
     <Color x:Key="ColorLilaDark">#FF2A015B</Color>
     <Color x:Key="ColorLilaDarkLight">#FF3A0080</Color>
@@ -33,6 +37,7 @@
     <Color x:Key="ColorLilaLighter">#FF5D00E4</Color>
     <Color x:Key="ColorLilaSmoke">#FF7400FF</Color>
 
+    <!-- red -->
     <Color x:Key="ColorRedDarkes">#FF380000</Color>
     <Color x:Key="ColorRedDark">#FF5B0101</Color>
     <Color x:Key="ColorRedDarkLight">Maroon</Color>
@@ -41,6 +46,7 @@
     <Color x:Key="ColorRedLighter">#FFE40000</Color>
     <Color x:Key="ColorRedSmoke">Red</Color>
 
+    <!-- orange -->
     <Color x:Key="ColorOrangeDarkes">#FF382B00</Color>
     <Color x:Key="ColorOrangeDark">#FF5B4201</Color>
     <Color x:Key="ColorOrangeDarkLight">#FF805D00</Color>
